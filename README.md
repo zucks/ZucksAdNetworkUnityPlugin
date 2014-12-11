@@ -1,7 +1,7 @@
-ZucksAdNetworkUnityPlugin
+ZucksAdNetwork UnityPlugin
 =========================
 
-Android向けアプリケーションにZucks Ad Networkの広告を表示するためのSDKとなります
+Unityで開発するアプリケーションにZucks Ad Networkの広告を表示するためのプラグインとなります
 
 * Zucks Ad Network
   * http://zucks.co.jp/publisher/adnetwork/
@@ -9,7 +9,7 @@ Android向けアプリケーションにZucks Ad Networkの広告を表示する
 ## パッケージ構成
 
 * ZucksAdNetworkUnityPlugin.unitypackage
-  * PluginのUnityパッケージ
+  * ZucksAdNetworkUnityPluginのUnityパッケージ
 * SampleApp
   * UnityPlugin組み込みのサンプルアプリケーション
   * メディアIDを設定することで、広告の表示が確認できます
@@ -17,11 +17,11 @@ Android向けアプリケーションにZucks Ad Networkの広告を表示する
   * 本ファイル
 
 ## 対象OS
-iOS5.1.1 以降 (armv7、armv7s、arm64)
-Android2.3以降
+
+iOS5.1.1以上 (armv7、armv7s、arm64)
+Android2.3以上
 
 ## 導入手順
 
-SDKの導入手順に関しては下記ページをご確認ください。
-
+プラグインの導入手順に関しては下記ページをご確認ください。
 https://ms.zucksadnetwork.com/media/sdk/manual/unity/
