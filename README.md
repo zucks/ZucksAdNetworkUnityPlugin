@@ -1,27 +1,27 @@
 ZucksAdNetworkUnityPlugin
 =========================
 
-AndroidŒü‚¯ƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ÉZucks Ad Network‚ÌL‚ğ•\¦‚·‚é‚½‚ß‚ÌSDK‚Æ‚È‚è‚Ü‚·
+Androidå‘ã‘ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã«Zucks Ad Networkã®åºƒå‘Šã‚’è¡¨ç¤ºã™ã‚‹ãŸã‚ã®SDKã¨ãªã‚Šã¾ã™
 
 * Zucks Ad Network
   * http://zucks.co.jp/publisher/adnetwork/
 
-## ƒpƒbƒP[ƒW\¬
+## ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸æ§‹æˆ
 
 * ZucksAdNetworkUnityPlugin.unitypackage
-  * Plugin‚ÌUnityƒpƒbƒP[ƒW
+  * Pluginã®Unityãƒ‘ãƒƒã‚±ãƒ¼ã‚¸
 * SampleApp
-  * UnityPlugin‘g‚İ‚İ‚ÌƒTƒ“ƒvƒ‹ƒAƒvƒŠƒP[ƒVƒ‡ƒ“
-  * ƒƒfƒBƒAID‚ğİ’è‚·‚é‚±‚Æ‚ÅAL‚Ì•\¦‚ªŠm”F‚Å‚«‚Ü‚·
+  * UnityPluginçµ„ã¿è¾¼ã¿ã®ã‚µãƒ³ãƒ—ãƒ«ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³
+  * ãƒ¡ãƒ‡ã‚£ã‚¢IDã‚’è¨­å®šã™ã‚‹ã“ã¨ã§ã€åºƒå‘Šã®è¡¨ç¤ºãŒç¢ºèªã§ãã¾ã™
 * README.md
-  * –{ƒtƒ@ƒCƒ‹
+  * æœ¬ãƒ•ã‚¡ã‚¤ãƒ«
 
-## ‘ÎÛOS
-iOS5.1.1 ˆÈ~ (armv7Aarmv7sAarm64)
-Android2.3ˆÈ~
+## å¯¾è±¡OS
+iOS5.1.1 ä»¥é™ (armv7ã€armv7sã€arm64)
+Android2.3ä»¥é™
 
-## “±“üè‡
+## å°å…¥æ‰‹é †
 
-SDK‚Ì“±“üè‡‚ÉŠÖ‚µ‚Ä‚Í‰º‹Lƒy[ƒW‚ğ‚²Šm”F‚­‚¾‚³‚¢B
+SDKã®å°å…¥æ‰‹é †ã«é–¢ã—ã¦ã¯ä¸‹è¨˜ãƒšãƒ¼ã‚¸ã‚’ã”ç¢ºèªãã ã•ã„ã€‚
 
-https://ms.zucksadnetwork.com/media/sdk/manual/android/
+https://ms.zucksadnetwork.com/media/sdk/manual/unity/
