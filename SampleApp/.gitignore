@@ -1,0 +1,30 @@
+# =============== #
+# Unity generated #
+# =============== #
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+/*.csproj
+/*.unityproj
+/*.sln
+/*.suo
+/*.svd
+/*.user
+/*.userprefs
+/*.pidb
+/*.booproj
+
+#Unity3D Generated File On Crash Reports
+sysinfo.txt
+
+# ============ #
+# for others   #
+# ============ #
+
+*.log #log files, for some plugins
+*.pyc #python bytecode cache, for some plugins.
