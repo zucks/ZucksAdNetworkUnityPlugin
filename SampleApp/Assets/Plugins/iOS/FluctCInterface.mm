@@ -124,8 +124,8 @@ CGRect CGRectContentMode(CGRect rect, CGRect parentRect, UIViewContentMode conte
     else if (contentMode == UIViewContentModeTopRight) {
         result = CGRectMove(result,
                             CGRectGetPointX(parentRect, 1.0),
-                            CGRectGetPointY(parentRect, 0.5),
-                            1.0, 0.5);
+                            CGRectGetPointY(parentRect, 0.0),
+                            1.0, 0.0);
     }
     else if (contentMode == UIViewContentModeBottomLeft) {
         result = CGRectMove(result,

@@ -1,5 +1,5 @@
 ﻿/**
- * ZucksAdNetworkUnityPlugin V1.1.0
+ * ZucksAdNetworkUnityPlugin V1.1.1
  */
 
 using UnityEngine;
