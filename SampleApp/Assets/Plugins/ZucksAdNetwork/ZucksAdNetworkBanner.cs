@@ -39,7 +39,7 @@ public class ZucksAdNetworkBanner : MonoBehaviour {
 	public float Width = 320.0f;
 	public float Height = 50.0f;
 	[SerializeField]
-	BannerPosition[] Position;
+	public BannerPosition[] Position;
 	public Margin margin;
 
 	// FluctBannerView
@@ -100,11 +100,13 @@ public class ZucksAdNetworkBanner : MonoBehaviour {
 	private void FluctBannerViewDismiss(int object_id){ UnityEngine.Debug.Log("FluctBannerViewDismiss()"); }
 	#endif
 
-	public void Show(Rect? bannerRect = null, string media_id = null)
-	{
+	public virtual void Awake () {
 		ObjectId = MaxObjectId;
 		MaxObjectId++;
+	}
 
+	public void Show(Rect? bannerRect = null, string media_id = null)
+	{
 		Rect b = bannerRect ?? Banner;
 		string mid = string.IsNullOrEmpty(media_id) ? MediaId : media_id;
 
@@ -135,15 +137,15 @@ public class ZucksAdNetworkBanner : MonoBehaviour {
 		#endif
 	}
 
-	public void ShowRelative(float? position_w = null, float? position_h = null, string media_id = null)
+	public void ShowRelative(float? w = null, float? h = null, string media_id = null)
 	{
-		ObjectId = MaxObjectId;
-		MaxObjectId++;
-
 		string mid = string.IsNullOrEmpty(media_id) ? MediaId : media_id;
 
-		float pos_w = position_w ?? Width;
-		float pos_h = position_h ?? Height;
+		float pos_w = w ?? Width;
+		float pos_h = h ?? Height;
+
+		margin = margin ?? new Margin();
+		Position = Position ?? new BannerPosition[0];
 
 		#if UNITY_IPHONE && !UNITY_EDITOR
 		FluctBannerViewCreate(ObjectId,mid);

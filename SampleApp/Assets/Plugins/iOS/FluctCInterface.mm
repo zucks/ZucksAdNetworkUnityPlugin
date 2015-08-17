@@ -161,7 +161,6 @@ extern void UnitySendMessage(const char *, const char *, const char *);
 
 @property (nonatomic, strong) NSMutableDictionary *bannerDictionary;
 @property (nonatomic, strong) NSMutableDictionary *interstitialDictionary;
-@property (nonatomic, strong) NSMutableDictionary *interstitialCallbackDictionary;
 
 @end
 
@@ -183,7 +182,6 @@ extern void UnitySendMessage(const char *, const char *, const char *);
     if (self) {
         _bannerDictionary = @{}.mutableCopy;
         _interstitialDictionary = @{}.mutableCopy;
-        _interstitialCallbackDictionary = @{}.mutableCopy;
     }
     return self;
 }
@@ -242,40 +240,6 @@ extern void UnitySendMessage(const char *, const char *, const char *);
         return YES;
     }
     return NO;
-}
-
-- (BOOL)startInterstitialCallbackForID:(int)interstitialObjectID objectName:(NSString *)objectName
-{
-    if ([self interstitialExistWithID:interstitialObjectID]) {
-        self.interstitialCallbackDictionary[@(interstitialObjectID)] = objectName;
-        FluctInterstitialView *interstitialView = [self interstitialWithID:interstitialObjectID];
-        interstitialView.delegate = self;
-        return YES;
-    }
-    return NO;
-}
-
-- (BOOL)stopInterstitialCallbackForID:(int)interstitialObjectID
-{
-    if ([self interstitialExistWithID:interstitialObjectID]) {
-        [self.interstitialCallbackDictionary removeObjectForKey:@(interstitialObjectID)];
-        FluctInterstitialView *interstitialView = [self interstitialWithID:interstitialObjectID];
-        interstitialView.delegate = nil;
-        return YES;
-    }
-    return NO;
-}
-
-- (void)fluctInterstitialView:(FluctInterstitialView *)interstitialView
-                callbackValue:(NSInteger)callbackValue
-{
-    for (NSNumber *n in self.interstitialDictionary.allKeys) {
-        if (self.interstitialDictionary[n] == interstitialView) {
-            NSString *objectName = self.interstitialCallbackDictionary[n];
-            NSString *message = [NSString stringWithFormat:@"%d:%d", n.intValue, callbackValue];
-            UnitySendMessage(objectName.UTF8String, "CallbackValue", message.UTF8String);
-        }
-    }
 }
 
 @end
@@ -444,7 +408,15 @@ bool FluctBannerViewShow(int object_id)
     FluctBannerView *view = [[FluctCInterface sharedObject] bannerWithID:object_id];
     if (view) {
         UIViewController *c = UnityGetGLViewController();
-        [c.view addSubview:view];
+        BOOL chk = YES;
+        for (UIView *v in [c.view subviews]) {
+          if (v == view) {
+            chk = NO;
+          }
+        }
+        if (chk) {
+          [c.view addSubview:view];
+        }
         return true;
     }
     return false;
@@ -464,7 +436,7 @@ bool FluctBannerViewDismiss(int object_id)
 
 bool FluctInterstitialViewCreate(int object_id, char *media_id)
 {
-    if (![[FluctCInterface sharedObject] bannerExistWithID:object_id]) {
+    if (![[FluctCInterface sharedObject] interstitialExistWithID:object_id]) {
         FluctInterstitialView *view = [[FluctInterstitialView alloc] init];
         if (media_id != NULL && strlen(media_id) > 0) {
             [view setMediaID:@(media_id)];
@@ -478,7 +450,6 @@ bool FluctInterstitialViewCreate(int object_id, char *media_id)
 
 bool FluctInterstitialViewDestroy(int object_id)
 {
-    [[FluctCInterface sharedObject] stopInterstitialCallbackForID:object_id];
     return [[FluctCInterface sharedObject] removeInterstitialForID:object_id];
 }
 
@@ -495,24 +466,6 @@ bool FluctInterstitialViewSetMediaID(int object_id, char *media_id)
             [view setMediaID:@(media_id)];
             return true;
         }
-    }
-    return false;
-}
-
-bool FluctInterstitialViewStartCallback(int object_id, char *object_name)
-{
-    if ([[FluctCInterface sharedObject] interstitialExistWithID:object_id]) {
-        [[FluctCInterface sharedObject] startInterstitialCallbackForID:object_id objectName:@(object_name)];
-        return true;
-    }
-    return false;
-}
-
-bool FluctInterstitialViewStopCallback(int object_id)
-{
-    if ([[FluctCInterface sharedObject] interstitialExistWithID:object_id]) {
-        [[FluctCInterface sharedObject] stopInterstitialCallbackForID:object_id];
-        return true;
     }
     return false;
 }

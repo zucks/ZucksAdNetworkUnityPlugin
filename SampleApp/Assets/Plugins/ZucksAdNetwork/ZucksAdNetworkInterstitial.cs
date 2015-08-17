@@ -2,21 +2,6 @@
 using System.Collections;
 using System.Runtime.InteropServices;
 
-// callback
-public enum ZucksAdInterstitialViewCallbackType : int
-{
-	ZucksAdInterstitialShow = 0,
-	ZucksAdInterstitialTap = 1,
-	ZucksAdInterstitialClose = 2,
-	ZucksAdInterstitialCancel = 3,
-	ZucksAdInterstitialOffline = 4,
-	ZucksAdInterstitialMediaIDError = 5,
-	ZucksAdInterstitialNoConfig = 6,
-	ZucksAdInterstitialSizeError = 7,
-	ZucksAdInterstitialGetConfigError = 8,
-	ZucksAdInterstitialOtherError = 100
-}
-
 public class ZucksAdNetworkInterstitial : MonoBehaviour {
 	public static int MaxInterstitialObjectId;
 	[HideInInspector]
@@ -27,11 +12,6 @@ public class ZucksAdNetworkInterstitial : MonoBehaviour {
 	// HexColor
 	public string HexColor = "";
 
-	// callback object id
-	public static int cb_object_id;
-	// callback value
-	public static int cb_value;
-	
 	#if UNITY_ANDROID && !UNITY_EDITOR
 	static AndroidJavaObject AndroidPlugin = null;
 	#endif
@@ -50,8 +30,6 @@ public class ZucksAdNetworkInterstitial : MonoBehaviour {
 	private static extern void FluctInterstitialViewShow(int object_id, string hex_color);
 	[DllImport ("__Internal")]
 	private static extern void FluctInterstitialViewDismiss(int object_id);
-	[DllImport ("__Internal")]
-	private static extern void FluctInterstitialViewStartCallback(int object_id, string object_name);
 	#elif UNITY_ANDROID && !UNITY_EDITOR
 	private void FluctInterstitialViewCreate(string mediaId) {
 		AndroidJavaObject activityContext;
@@ -60,11 +38,9 @@ public class ZucksAdNetworkInterstitial : MonoBehaviour {
 		}
 		AndroidPlugin.Call("FluctInterstitialViewCreate", activityContext, mediaId);
 	}
-	private void FluctInterstitialViewStartCallback(string cb_obj) {
-		AndroidPlugin.Call("FluctInterstitialViewStartCallback", cb_obj);
-	}
-	private void FluctInterstitialViewShow(string hexColor) {
-		AndroidPlugin.Call("FluctInterstitialViewShow", hexColor);
+
+	private void FluctInterstitialViewShow() {
+		AndroidPlugin.Call("FluctInterstitialViewShow");
 	}
 	private void FluctInterstitialViewDestroy() {
 		AndroidPlugin.Call("FluctInterstitialViewDestroy");
@@ -76,13 +52,15 @@ public class ZucksAdNetworkInterstitial : MonoBehaviour {
 	private void FluctInterstitialViewSetMediaID(int object_id, string media_id){ UnityEngine.Debug.Log("FluctInterstitialViewSetMediaID()"); }
 	private void FluctInterstitialViewShow(int object_id, string hex_color){ UnityEngine.Debug.Log("FluctInterstitialViewShow()"); }
 	private void FluctInterstitialViewDismiss(int object_id){ UnityEngine.Debug.Log("FluctInterstitialViewDismiss()"); }
-	private void FluctInterstitialViewStartCallback(int object_id, string object_name){ UnityEngine.Debug.Log("FluctInterstitialViewStartCallback()"); }
 	#endif
 
-	public void ShowInterstitial(string cb_obj, string media_id = null, string hex_color = null)
-	{
+	public void Awake () {
 		InterstitialObjectId = MaxInterstitialObjectId;
 		MaxInterstitialObjectId++;
+	}
+
+	public void ShowInterstitial(string media_id = null, string hex_color = null)
+	{
 
 		string mid = string.IsNullOrEmpty(media_id) ? MediaId : media_id;
 		string hc = string.IsNullOrEmpty(hex_color) ? HexColor : hex_color;
@@ -91,20 +69,17 @@ public class ZucksAdNetworkInterstitial : MonoBehaviour {
 		FluctInterstitialViewCreate(InterstitialObjectId,mid);
 		FluctInterstitialViewExist(InterstitialObjectId);
 		FluctInterstitialViewSetMediaID(InterstitialObjectId,mid);
-		FluctInterstitialViewStartCallback(InterstitialObjectId,cb_obj);
 		FluctInterstitialViewShow(InterstitialObjectId,hc);
 		#elif UNITY_ANDROID && !UNITY_EDITOR
 		if (null == AndroidPlugin) {
 			AndroidPlugin = new AndroidJavaObject( "com.voyagegroup.android.unity.plugins.FluctUnityPlugins");
 		}
 		FluctInterstitialViewCreate(mid);
-		FluctInterstitialViewStartCallback(cb_obj);
-		FluctInterstitialViewShow(hc);
+		FluctInterstitialViewShow();
 		#else
 		FluctInterstitialViewCreate(InterstitialObjectId,mid);
 		FluctInterstitialViewExist(InterstitialObjectId);
 		FluctInterstitialViewSetMediaID(InterstitialObjectId,mid);
-		FluctInterstitialViewStartCallback(InterstitialObjectId,cb_obj);
 		FluctInterstitialViewShow(InterstitialObjectId,hc);
 		#endif
 	}
@@ -122,30 +97,5 @@ public class ZucksAdNetworkInterstitial : MonoBehaviour {
 		FluctInterstitialViewDestroy(InterstitialObjectId);
 		#endif
 	}
-
-	// UnitySendMessage call method
-	void CallbackValue (string message)
-	{
-		#if UNITY_IPHONE && !UNITY_EDITOR
-		string[] arrMessage = message.Split(':');
-		cb_object_id = int.Parse(arrMessage[0]);
-		cb_value = int.Parse(arrMessage[1]);
-		#elif UNITY_ANDROID && !UNITY_EDITOR
-		cb_value = int.Parse(message);
-		#else
-		string[] arrMessage = message.Split(':');
-		cb_object_id = int.Parse(arrMessage[0]);
-		cb_value = int.Parse(arrMessage[1]);
-		#endif
-	}
-
-	public int InterstitialCallback () {
-		if (InterstitialObjectId == cb_object_id) {
-			return cb_value;
-		} else {
-			return -1;
-		}
-	}
-
 
 }
