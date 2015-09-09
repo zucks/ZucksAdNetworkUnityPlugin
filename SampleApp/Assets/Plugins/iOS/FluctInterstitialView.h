@@ -1,6 +1,6 @@
 //
 //  FluctInterstitialView.h
-//  FluctSDK ver. 3.0.2
+//  FluctSDK ver. 3.1.0
 //
 //  Fluct SDK
 //  Copyright 2013-2014 VOYAGE GROUP, Inc. All rights reserved.
