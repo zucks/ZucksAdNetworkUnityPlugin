@@ -1,6 +1,6 @@
 //
 //  FluctSDK.h
-//  FluctSDK ver. 3.1.3
+//  FluctSDK ver. 3.1.4
 //
 //  Fluct SDK
 //  Copyright 2011-2014 VOYAGE GROUP, Inc. All rights reserved.
