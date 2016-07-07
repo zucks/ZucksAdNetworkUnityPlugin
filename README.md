@@ -10,15 +10,13 @@ Unityで開発するアプリケーションにZucks Ad Networkの広告を表�
 
 * ZucksAdNetworkUnityPlugin.unitypackage
   * ZucksAdNetworkUnityPluginのUnityパッケージ
-* SampleApp
-  * UnityPlugin組み込みのサンプルアプリケーション
-  * メディアIDを設定することで、広告の表示が確認できます
+  * Sample用シーン
 * README.md
   * 本ファイル
 
 ## 対象OS
 
-iOS5.1.1以上 (armv7、armv7s、arm64)
+iOS6.0以上
 Android2.3以上
 
 ## 導入手順
