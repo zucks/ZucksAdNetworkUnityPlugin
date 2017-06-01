@@ -16,8 +16,8 @@ Unityで開発するアプリケーションにZucks Ad Networkの広告を表�
 
 ## 対象OS
 
-iOS6.0以上
-Android2.3以上
+iOS 6.0 以上
+Android 4.0 以上
 
 ## 導入手順
 
